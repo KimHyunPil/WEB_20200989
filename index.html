@@ -9,7 +9,8 @@
 	  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 			<base href = "https://web--skowj.run.goorm.site/">
 		
-	<script type="text/javascript" src="Js/search.js" defer></script>
+		<script type="text/javascript" src="Js/search.js" defer></script>
+		<script type="text/javascript" src="Js/basic_test.js" defer></script>	
 
 			</head>
 			<body>
@@ -58,25 +59,38 @@
 			<! img태그는 이미지를 삽입합니다. src=경로, 이미지 깨지면 alt 출력>
 				
 				
-				<p style="text-align:center"> 검색 : <input type = "text" name = "search" size = "77"
-				value = ""><button id = "search_btn" type = "button">검색	</button>
-				<br>
-				</p><br><br><br><br>
-				<table style = "margin-left: auto; margin-right: auto;" border="1" width = "500">
-		   <caption>인기 검색어</caption>
-		   <tbody>
-			   <tr><td bgcolor = "green" width = "50"><b>영화</b> </td>
+				<form action="https://www.google.co.kr/search" method="GET" target="_blank">
+            <div class="d-flex justify-content-center">
+                <mx-auto>
+			
+                    <input name="query" type="text" class="form-control-lg" placeholder="검색어 입력" aria-label="search" aria-describedby="search_btn" id="search_txt">
+                </mx-auto>
+                <button class="btn btn-success" type="submit" id="search_btn">검색</button>
+           </div>
+        </form>
+				<br><br><br><br>
+
+            <div class="w-auto p-3" style = "background-color:#;">
+				<!--<table class="table table-striped table table=bordered table-hover">-->
+
+				<table class = "table table-dark table-hover">
+					<caption align="top"><font size = "4em"> <b>현재 검색어: </b> <p id ="search_message"></p></caption>
+		   <tbody class="table-group-divider">
+			   <tr bgcolor = "yellow">
+			       <td class = "table-primary" width = "80"><font size = "4em"> <b>영화</b> </font></td>
 				   <td width = "80" bgcolor = "blue">아저씨</td>
 				   <td width = "80" bgcolor = "blue">아저씨</td>
 			       <td width = "100">어머니</td>
 				   <td width = "100"> 헬머니</td> 
 				   <td>할부지</td></tr> <!1행 추가.>
 			   
-			    <tr bgcolor = "red"><td width = "50">음악</td> 
-				     <td>POP</td><td> Rock</td><td>oasis</td> <td>beatlse</td><td rowspan="2">green day</td></tr>
+			    <tr bgcolor = "red">
+					<td class="table-secondary" width = "50"><b>음악</b></td> 
+				    <td> Rock</td><td>oasis</td> <td>beatlse</td><td>koeda</td><td colspan="2">green day</td></tr>
 		        
-			   <tr bgcolor = "red"><td colspan = "2" width = "50"> 게임 </td> 
-					  <td>lol</td> <td>wow</td> <td> wtf</td></tr>
+			   <tr bgcolor = "red">
+				   <td class="table-success" width = "50"><b> 게임 </b></td> 
+					  <td>lol</td> <td>wow</td> <td colspan="2"> wtf</td></tr>
 			   
 			   <tr></tr><td colspan = "6" width = "490"> <font size="2em"></font>외부사이트링크 </td>
 			    <tr><td  colspan = "2" width = "130"><b>네이버</b> </td>
@@ -102,7 +116,7 @@
 </footer>
 
 				
-		
+	
        	
 		</body>
 	

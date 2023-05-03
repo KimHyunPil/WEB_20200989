@@ -8,14 +8,10 @@
 	  rel="stylesheet"
 	  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 			<base href = "https://web--skowj.run.goorm.site/">
-		
-		<script type="text/javascript" src="Js/search.js" defer></script>
-		<script type="text/javascript" src="Js/basic_test.js" defer></script>
-		<script type="text/javascript" src="Js/data_type.js" defer></script>
-		<script type="text/javascript" src="Js/pop_up.js" defer></script>
-		<script type="text/javascript" src="Js/array_test.js" defer></script>
+	
+		<script type="text/javascript" src="Js/login.js" defer></script>
 			</head>
-			<body onload = "pop_up()";>
+			<body onload="get_id();">
 				<h1>
 					Hello,world!
 				</h1>
@@ -51,7 +47,7 @@
           </ul>
         </li>
 		  <li class="nav-item">
-	<button class="btn btn-outline-success" type="submit" onclick="location.href='login/login.html'">로그인하기</button>
+	<button class="btn btn-outline-success" type="submit" onclick="logout()">로그아웃</button>
 </li>
       </ul>
     </div>

@@ -12,7 +12,8 @@
 			<script type="text/javascript" src="Js/login.js" defer></script>
 			
 			</head>
-	 <body class="text-center">
+	 <body class="text-center" onload="init();">
+
     <br><br><br>
 		 
 		  <div class = "mx-auto" style= "width: 500px;">
@@ -33,10 +34,11 @@
         </div>
 
         <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> 날 기억해
-          </label>
-        </div>
+     <label>
+        <input type="checkbox" value="remember-me" id="idSaveCheck"> 날 기억해
+     </label>
+   </div>
+
         <button class="w-100 btn btn-lg btn-primary" onclick ="login()" type="button">로그인</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
           

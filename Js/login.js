@@ -1,3 +1,10 @@
+function setCookie(cookieName, cookieValue, expirationDays) {
+    var date = new Date();
+    date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + date.toUTCString();
+    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+}
+
 function login(){
     let form = document.querySelector("#form_main");
     let id = document.querySelector("#floatingInput");
@@ -19,6 +26,7 @@ function login(){
 if(id.value.length === 0 || password.value.length === 0){
         alert("아이디와 비밀번호를 모두 입력해주세요.");
     }else{
+		session_set();
         form.submit();
     }
 }
@@ -52,6 +60,21 @@ function deleteCookie(cookieName){
     document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
 }
 
+function getCookie(cookieName) {
+    var name = cookieName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var cookieArray = decodedCookie.split(";");
+
+    for (var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+
+    return "";
+}
+
 function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
     let id = document.querySelector("#floatingInput");
     let check = document.querySelector("#idSaveCheck");
@@ -60,5 +83,30 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
     if(get_id) { 
     id.value = get_id; 
     check.checked = true; 
+    }
+}
+
+function session_set() { //세션 저장
+    let id = document.querySelector("#floatingInput");
+    if (sessionStorage) {
+        sessionStorage.setItem("Session_Storage_test", id.value);
+
+    } else {
+        alert("로컬 스토리지 지원 x");
+    }
+}
+
+function session_get() { //세션 읽기
+    if (sessionStorage) {
+       return sessionStorage.getItem("Session_Storage_test");
+    } else {
+        alert("세션 스토리지 지원 x");
+    }
+}
+
+function session_check() { //세션 검사
+    if (sessionStorage.getItem("Session_Storage_test")) {
+        alert("이미 로그인 되었습니다.");
+        location.href='index_login.html’; // 로그인된 페이지로 이동
     }
 }

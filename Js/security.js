@@ -14,4 +14,4 @@ function decodeByAES256(key, data){
         mode: CryptoJS.mode.CBC
     });
     return cipher.toString(CryptoJS.enc.Utf8);
-
+}

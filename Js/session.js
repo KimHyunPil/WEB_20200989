@@ -51,6 +51,8 @@ function session_del() {//세션 삭제
         let en_text = encrypt_text(password.value);
         sessionStorage.setItem("Session_Storage_test", en_text);
 
-    } else {
+    } 
+		else {
         alert("로컬 스토리지 지원 x");
     }
+}

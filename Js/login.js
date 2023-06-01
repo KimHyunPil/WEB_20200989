@@ -2,12 +2,53 @@ addJavascript('/Js/security.js'); // 암복호화 함수
 addJavascript('/Js/session.js'); // 세션 함수
 addJavascript('/Js/cookie.js'); // 쿠키 함수
 
+function login_check(id, password) {
+    // 정규 표현식을 사용하여 공백이 있는지 확인
+    var re = /\s/g;
+
+    // 아이디 또는 비밀번호에 공백이 있는 경우
+    if (re.test(id) || re.test(password)) {
+        alert("아이디와 비밀번호에는 공백을 포함할 수 없습니다.");
+        return false;
+    }
+    return true;
+}
+
+function login_count() {
+    var login_cnt = getCookie("login_cnt");
+
+    if (login_cnt === undefined) {
+        // login_cnt 쿠키가 없으면, 첫 로그인이므로 쿠키를 생성하고 값을 1로 설정합니다.
+        setCookie("login_cnt", 1, 7); // 7일 동안 유지되는 쿠키를 설정합니다.
+    } else {
+        // 이미 login_cnt 쿠키가 있다면, 이 값을 증가시킵니다.
+        setCookie("login_cnt", Number(login_cnt) + 1, 7); // 쿠키의 유효기간을 7일로 유지합니다.
+    }
+}
+
+function logout_count() {
+    var logout_cnt = getCookie("logout_cnt");
+
+    if (logout_cnt === undefined) {
+        // logout_cnt 쿠키가 없으면, 첫 로그아웃이므로 쿠키를 생성하고 값을 1로 설정합니다.
+        setCookie("logout_cnt", 1, 7); // 7일 동안 유지되는 쿠키를 설정합니다.
+    } else {
+        // 이미 logout_cnt 쿠키가 있다면, 이 값을 증가시킵니다.
+        setCookie("logout_cnt", Number(logout_cnt) + 1, 7); // 쿠키의 유효기간을 7일로 유지합니다.
+    }
+}
+
+
 function login(){
     let form = document.querySelector("#form_main");
     let id = document.querySelector("#floatingInput");
     let password = document.querySelector("#floatingPassword");
     let check = document.querySelector("#idSaveCheck");
 
+	 if (!login_check(id.value, password.value)) {
+        return;
+    }
+	
     if(check.checked == true) { // 아이디 체크 o
         alert("쿠키를 저장합니다.");
         setCookie("id", id.value, 1); // 1일 저장
@@ -24,6 +65,7 @@ function login(){
         alert("아이디와 비밀번호를 모두 입력해주세요.");
     }else{
         session_set();
+        login_count();  // 로그인 횟수 증가 함수 호출
         form.submit();
     }
 	
@@ -42,8 +84,9 @@ function login(){
 
 	
 	
-function logout(){
-	session_del(); // 세션 삭제
+function logout() {
+    session_del(); // 세션 삭제
+    logout_count();  // 로그아웃 횟수 증가 함수 호출
     location.href='/index.html';
 }
 

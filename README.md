@@ -24,7 +24,7 @@
 
 	</html>
   
-  2023년 3월 15일 (수요일)
+  2023년 3월 15일 (2주차)
   
   <!DOCTYPE html>
 	<html>
@@ -80,7 +80,7 @@
 
 	</html>
   
-   2023년 3월 22일 (수요일)
+   2023년 3월 22일 (3주차)
     
       <meta name = "author" content = "학번">
 	  <meta charset = "utf-8">
@@ -134,7 +134,7 @@
 
 
 		</body>
-     2023년 3월 23일 (자발적 )
+     2023년 3월 23일 (3주차 보강)
           
           Js/search.js
           document.getElementByid("search_btn").addEventListener('click', search_message);
@@ -253,7 +253,7 @@ function search_message(){
   </div>
 </footer>
           
-  2023년 3월 29일 (수요일)
+  2023년 3월 29일 (4주차)
         
         Js/basic_test.js
         var jb = 'hi'; // 변수 선언 후 주석 가능
@@ -359,7 +359,7 @@ function search_message(){
 
 		</body>
         
-  2023년 4월 5일 (수요일)
+  2023년 4월 5일 (5주차)
         
           Js/basic_test.js
           @@ -7,7 +7,7 @@ if (true) {
@@ -465,7 +465,7 @@ function search_message(){
 	</body>
 </html>
           
-  2023년 4월 12일 (수요일)
+  2023년 4월 12일 (6주차)
              
 Js/array_test.js
 @@ -0,0 +1,18 @@
@@ -546,7 +546,7 @@ window.onload=showWindow;
 	</body>
 </html>
         
-  2023년 4월 19일 (수요일)
+  2023년 4월 19일 (7주차)
           
          Js/close_window.js
 @@ -7,7 +7,7 @@ show_time(); // 실시간 시간 보여주기
@@ -880,7 +880,7 @@ index_login.html
 
 	</html>
           
-  2023년 5월 3일 (수요일)
+  2023년 5월 3일 (9주차)
         
         Js/login.js
 @@ -2,18 +2,28 @@ function login(){
@@ -1053,7 +1053,7 @@ login/login.html → login.html
 	</body>
 </html>
         
-  2023년 5월 10일 (수요일)
+  2023년 5월 10일 (10주차)
         
          
 Js/login.js
@@ -1128,7 +1128,7 @@ function session_check() { //세션 검사
     }
 }
         
-  2023년 5월 17일 (수요일)
+  2023년 5월 17일 (11주차)
         
       
 Js/cookie.js
@@ -1567,7 +1567,7 @@ join.html
 
 	</html>     
      
-  2023년 5월 24일 (수요일)
+  2023년 5월 24일 (12주차)
         
          
 Js/map.js
@@ -1992,5 +1992,81 @@ index_login.html
 			<div class="embed-responsive embed-responsive-16by9">
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/l0JfCluVH1o" width="800" height="600" frameborder="0" allowfullscreen></iframe>
 
-              
-  2023년 6월 1일 (13주차 보강)
+               
+Js/login.js
+@@ -2,12 +2,53 @@ addJavascript('/Js/security.js'); // 암복호화 함수
+addJavascript('/Js/session.js'); // 세션 함수
+addJavascript('/Js/cookie.js'); // 쿠키 함수
+
+function login_check(id, password) {
+    // 정규 표현식을 사용하여 공백이 있는지 확인
+    var re = /\s/g;
+
+    // 아이디 또는 비밀번호에 공백이 있는 경우
+    if (re.test(id) || re.test(password)) {
+        alert("아이디와 비밀번호에는 공백을 포함할 수 없습니다.");
+        return false;
+    }
+    return true;
+}
+
+function login_count() {
+    var login_cnt = getCookie("login_cnt");
+
+    if (login_cnt === undefined) {
+        // login_cnt 쿠키가 없으면, 첫 로그인이므로 쿠키를 생성하고 값을 1로 설정합니다.
+        setCookie("login_cnt", 1, 7); // 7일 동안 유지되는 쿠키를 설정합니다.
+    } else {
+        // 이미 login_cnt 쿠키가 있다면, 이 값을 증가시킵니다.
+        setCookie("login_cnt", Number(login_cnt) + 1, 7); // 쿠키의 유효기간을 7일로 유지합니다.
+    }
+}
+
+function logout_count() {
+    var logout_cnt = getCookie("logout_cnt");
+
+    if (logout_cnt === undefined) {
+        // logout_cnt 쿠키가 없으면, 첫 로그아웃이므로 쿠키를 생성하고 값을 1로 설정합니다.
+        setCookie("logout_cnt", 1, 7); // 7일 동안 유지되는 쿠키를 설정합니다.
+    } else {
+        // 이미 logout_cnt 쿠키가 있다면, 이 값을 증가시킵니다.
+        setCookie("logout_cnt", Number(logout_cnt) + 1, 7); // 쿠키의 유효기간을 7일로 유지합니다.
+    }
+}
+
+
+function login(){
+    let form = document.querySelector("#form_main");
+    let id = document.querySelector("#floatingInput");
+    let password = document.querySelector("#floatingPassword");
+    let check = document.querySelector("#idSaveCheck");
+
+	 if (!login_check(id.value, password.value)) {
+        return;
+    }
+
+    if(check.checked == true) { // 아이디 체크 o
+        alert("쿠키를 저장합니다.");
+        setCookie("id", id.value, 1); // 1일 저장
+@@ -24,6 +65,7 @@ function login(){
+        alert("아이디와 비밀번호를 모두 입력해주세요.");
+    }else{
+        session_set();
+        login_count();  // 로그인 횟수 증가 함수 호출
+        form.submit();
+    }
+
+@@ -42,8 +84,9 @@ function login(){
+
+
+
+function logout(){
+	session_del(); // 세션 삭제
+function logout() {
+    session_del(); // 세션 삭제
+    logout_count();  // 로그아웃 횟수 증가 함수 호출
+    location.href='/index.html';
+}
+
+				
+  2023년 6월 1일 (11 ~ 13주차 보강)
